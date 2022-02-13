@@ -52,6 +52,32 @@ class Board:
             print(*self.your_hidden_board[2],) 
             print(*self.your_hidden_board[3],)
 
+def validator():
+    while True:
+        try:
+            guess_x = int(input("select a column: "))
+        except ValueError:
+            print("not a number")
+        else:
+            if 0 <= guess_x <= 3:
+                break
+            else:
+                print("Please choose a number between 0 and 3")
+
+    while True:
+        try:
+            guess_y = int(input("select a row: "))
+        except ValueError:
+            print("not a number")
+        else:
+            if 0 <= guess_y <= 3:
+                break
+            else:
+                print("Please choose a number between 0 and 3")
+
+def play_game():
+    validator()
+
 def new_game():
     """
     this is a doc string
@@ -70,3 +96,4 @@ def new_game():
     computer_board.print_board()
 
 new_game()
+play_game()
