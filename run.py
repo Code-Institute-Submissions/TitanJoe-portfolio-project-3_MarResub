@@ -35,6 +35,23 @@ class Board:
                 coord_y = list[1]
                 self.your_board[coord_x][coord_y] = "@ "
 
+    def print_board(self):
+        """
+        this is a doc string
+        """
+        if(self.player_type == "player"):
+            print("This is your board")
+            print(*self.your_board[0],)
+            print(*self.your_board[1],) 
+            print(*self.your_board[2],) 
+            print(*self.your_board[3],) 
+        else:
+            print("This is the enemy board")
+            print(*self.your_hidden_board[0],)
+            print(*self.your_hidden_board[1],) 
+            print(*self.your_hidden_board[2],) 
+            print(*self.your_hidden_board[3],)
+
 def new_game():
     """
     this is a doc string
@@ -48,5 +65,8 @@ def new_game():
 
     computer_board.pop_board()
     player_board.pop_board()
+
+    player_board.print_board()
+    computer_board.print_board()
 
 new_game()
