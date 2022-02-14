@@ -3,22 +3,23 @@ from random import randint
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 class Board:
     """
-     
+    gg
     """
     def __init__(self, cptn, player_type):
         self.cptn = cptn
         self.player_type = player_type
         self.loc_ships = []
+        self.loc_guesses = []
         self.your_board = [
-        ['. ', '. ', '. ', '. '],
-        ['. ', '. ', '. ', '. '],
-        ['. ', '. ', '. ', '. '],
-        ['. ', '. ', '. ', '. ']]
+            ['. ', '. ', '. ', '. '],
+            ['. ', '. ', '. ', '. '],
+            ['. ', '. ', '. ', '. '],
+            ['. ', '. ', '. ', '. ']]
         self.your_hidden_board = [
-        ['. ', '. ', '. ', '. '],
-        ['. ', '. ', '. ', '. '],
-        ['. ', '. ', '. ', '. '],
-        ['. ', '. ', '. ', '. ']]
+            ['. ', '. ', '. ', '. '],
+            ['. ', '. ', '. ', '. '],
+            ['. ', '. ', '. ', '. '],
+            ['. ', '. ', '. ', '. ']]
 
     def pop_board(self):
         """
@@ -52,7 +53,24 @@ class Board:
             print(*self.your_hidden_board[2],) 
             print(*self.your_hidden_board[3],)
 
-def validator():
+    def loc_validator(self):
+        """
+        .git/
+        """
+        while True:
+            target = []
+            target.append(column_validator())
+            target.append(row_validator())
+            if target not in self.loc_guesses:
+                return target
+                break
+            else:
+                print("You cant guess the same place twice")
+
+def column_validator():
+    """
+    .git/
+    """
     while True:
         try:
             guess_x = int(input("select a column: "))
@@ -60,10 +78,15 @@ def validator():
             print("not a number")
         else:
             if 0 <= guess_x <= 3:
+                return guess_x
                 break
             else:
                 print("Please choose a number between 0 and 3")
 
+def row_validator():
+    """
+    .git/
+    """
     while True:
         try:
             guess_y = int(input("select a row: "))
@@ -71,12 +94,10 @@ def validator():
             print("not a number")
         else:
             if 0 <= guess_y <= 3:
+                return guess_y
                 break
             else:
                 print("Please choose a number between 0 and 3")
-
-def play_game():
-    validator()
 
 def new_game():
     """
@@ -95,5 +116,7 @@ def new_game():
     player_board.print_board()
     computer_board.print_board()
 
+    player_board.loc_validator()
+    computer_board.loc_validator()
+
 new_game()
-play_game()
