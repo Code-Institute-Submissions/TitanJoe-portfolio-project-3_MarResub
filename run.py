@@ -10,6 +10,7 @@ class Board:
         self.player_type = player_type
         self.loc_ships = []
         self.loc_guesses = []
+        self.score = 0
         self.your_board = [
             ['. ', '. ', '. ', '. '],
             ['. ', '. ', '. ', '. '],
@@ -57,15 +58,49 @@ class Board:
         """
         .git/
         """
-        while True:
-            target = []
-            target.append(column_validator())
-            target.append(row_validator())
-            if target not in self.loc_guesses:
-                return target
-                break
+        if self.player_type == "player":
+            while True:
+                target = []
+                target.append(column_validator())
+                target.append(row_validator())
+                if target not in self.loc_guesses:
+                    self.loc_guesses.append(target)
+                    return target
+                    break
+                else:
+                    print("You cant guess the same place twice")
+        else:
+            while True:
+                target = []
+                target.append(randint(0,3))
+                target.append(randint(0,3))
+                if target not in self.loc_guesses:
+                    self.loc_guesses.append(target)
+                    return target
+                    break
+
+    def take_turn(self):
+        """
+        .git/
+        """
+        turn_guess = self.loc_validator()
+        if self.player_type == "player":
+            if computer_board.your_board[turn_guess[0]][turn_guess[1]] == "@ ":
+                computer_board.your_hidden_board[turn_guess[0]][turn_guess[1]] = "*"
+                print("hit!")
+                self.score += 1
             else:
-                print("You cant guess the same place twice")
+                computer_board.your_hidden_board[turn_guess[0]][turn_guess[1]] = "X "
+                print("miss!")
+        else:
+            if player_board.your_board[turn_guess[0]][turn_guess[1]] == "@ ":
+                player_board.your_board[turn_guess[0]][turn_guess[1]] = "* "
+                self.score += 1
+            else:
+                player_board.your_board[turn_guess[0]][turn_guess[1]] = "X "
+        if self.player_type == "computer":
+            player_board.print_board()
+            computer_board.print_board()            
 
 def column_validator():
     """
@@ -99,24 +134,43 @@ def row_validator():
             else:
                 print("Please choose a number between 0 and 3")
 
+
+def play_game():
+    """
+    .git/
+    """
+    while player_board.score <= 3 or computer_board.score <= 3:
+        print(f"{player_board.cptn} score is: {player_board.score}")
+        print(f"Computers score is: {computer_board.score}")
+        player_board.take_turn()
+        if player_board.score == 4:
+            print(f"{player_board.cptn} wins!")
+            break
+        computer_board.take_turn()
+        if computer_board.score == 4:
+            print(f"{computer_board.cptn} wins!")
+            break
+
+
+    
+
 def new_game():
     """
     this is a doc string
     """
-    print("Welcome to Battleships")
-    cptn_name = input("What is your name: ")
-    print(f"Welcome Captian {cptn_name}.")
-
-    computer_board = Board("enemy", "computer")
-    player_board = Board(cptn_name, "player")
-
     computer_board.pop_board()
     player_board.pop_board()
 
     player_board.print_board()
     computer_board.print_board()
 
-    player_board.loc_validator()
-    computer_board.loc_validator()
+
+print("Welcome to Battleships")
+cptn_name = input("What is your name: ")
+print(f"Welcome Captian {cptn_name}.")
+
+computer_board = Board("enemy", "computer")
+player_board = Board(cptn_name, "player")
 
 new_game()
+play_game()
