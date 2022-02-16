@@ -41,14 +41,7 @@ i tested using the following:
 Passed the code through a PEP8 linterwith 2 errors
 Given invalid inputs: strings when numbers are expected, out of bounds inputs, same input twice
 Tested in my local terminal and the Code Institute Heroku terminal
-
-### Deployment
-This project was deployed using Code Institute's mock terminal for Heroku.
-Steps for deployment:
-Fork or clone this repository
-Create a new Heroku app o Set the buildbacks to Python and NodeJS in that order 
-Link the Heroku app to the repository
-Click on Deploy
 ### Credits
 Code Institute for the deployment terminal
 Wikipedia for the details of the Battleships game
+Code Institute for the readme format
