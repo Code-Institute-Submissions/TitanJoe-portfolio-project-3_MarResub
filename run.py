@@ -2,7 +2,9 @@ from random import randint
 
 class Board:
     """
-    gg
+    This is the main object of the program. 
+    It sets the players name and if they are the computer
+    It stores the location of the ships, scores and guesses made
     """
     def __init__(self, cptn, player_type):
         self.cptn = cptn
@@ -10,11 +12,14 @@ class Board:
         self.loc_ships = []
         self.loc_guesses = []
         self.score = 0
+        # these are the printable boards, 
+        # their values are updated as as the game plays
         self.your_board = [
             ['. ', '. ', '. ', '. '],
             ['. ', '. ', '. ', '. '],
             ['. ', '. ', '. ', '. '],
             ['. ', '. ', '. ', '. ']]
+        # this board is printed to hide the location of the enemy ships
         self.your_hidden_board = [
             ['. ', '. ', '. ', '. '],
             ['. ', '. ', '. ', '. '],
@@ -23,7 +28,9 @@ class Board:
 
     def pop_board(self):
         """
-        this is a doc string
+        this function populates the board
+        It tests that it doesnt place a ship in the same location twice
+        It updates the 'printable boards' and the .loc_ships list
         """
         while len(self.loc_ships) < 4:
             list = []
@@ -38,7 +45,8 @@ class Board:
 
     def print_board(self):
         """
-        this is a doc string
+        This function based on what player it is
+        prints the correct board
         """
         if(self.player_type == "player"):
             print(f"This is Captian {self.cptn}'s board")
@@ -55,7 +63,10 @@ class Board:
 
     def loc_validator(self):
         """
-        .git/
+        this function fistly checks if it is the player or computer
+        Then either checks the player values or
+        gives the computer random values
+        It also checks if the same place was guessed twice
         """
         if self.player_type == "player":
             while True:
@@ -80,7 +91,16 @@ class Board:
 
     def take_turn(self):
         """
-        .git/
+        This function firstly checks if it is the player or the computer
+        if it is the player:
+            it lets the player know that their coordinates have been acepted
+        if it is the computer:
+            tells the player that the computer is taking its turn
+        then it checks if it was a hit or a miss
+        updates the correct boards
+        prints the results of the targeted locations
+        in the case of a hit, increments the score
+
         """
         turn_guess = self.loc_validator()
         if self.player_type == "player":
@@ -105,25 +125,13 @@ class Board:
             player_board.print_board()
             computer_board.print_board()            
 
-def column_validator():
-    """
-    .git/
-    """
-    while True:
-        try:
-            guess_x = int(input("select a column: "))
-        except ValueError:
-            print("not a number")
-        else:
-            if 0 <= guess_x <= 3:
-                return guess_x
-                break
-            else:
-                print("Please choose a number between 0 and 3")
-
 def row_validator():
     """
-    .git/
+    This function simply asks the player for a row to target
+    checks two condtions:
+        validates that it is a number
+        and if the number is between 0 and 3
+    if both parameters are not met it returns and error and asks again
     """
     while True:
         try:
@@ -137,10 +145,34 @@ def row_validator():
             else:
                 print("Please choose a number between 0 and 3")
 
+def column_validator():
+    """
+    This function simply asks the player for a column to target
+    checks two condtions:
+        validates that it is a number
+        and if the number is between 0 and 3
+    if both parameters are not met it returns and error and asks again
+    """
+    while True:
+        try:
+            guess_x = int(input("select a column: "))
+        except ValueError:
+            print("not a number")
+        else:
+            if 0 <= guess_x <= 3:
+                return guess_x
+                break
+            else:
+                print("Please choose a number between 0 and 3")
+
+
+
 
 def play_game():
     """
-    .git/
+    This function starts the game
+    prints the score every turn 
+    checks if a player has won
     """
     while player_board.score <= 3 or computer_board.score <= 3:
         print(f"Captian {player_board.cptn}'s score is: {player_board.score}")
@@ -158,9 +190,11 @@ def play_game():
 
     
 
-def new_game():
+def game_setup():
     """
-    this is a doc string
+    this function sets up the boards by
+    populating them and 
+    printing the boards before the turn begins
     """
     computer_board.pop_board()
     player_board.pop_board()
@@ -175,6 +209,7 @@ print(f"Welcome Captian {cptn_name}.")
 print("The boards use Zero-based numbering")
 print("Only values 0, 1, 2, 3 will be accepted")
 
+# I had to declare these outside of a function to make them globally accessible 
 computer_board = Board("The Computer", "computer")
 player_board = Board(cptn_name, "player")
 
