@@ -207,5 +207,5 @@ print("Only values 0, 1, 2, 3 will be accepted")
 computer_board = Board("The Computer", "computer")
 player_board = Board(cptn_name, "player")
 
-new_game()
+game_setup()
 play_game()
