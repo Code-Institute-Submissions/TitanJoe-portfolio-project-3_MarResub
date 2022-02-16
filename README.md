@@ -1,31 +1,54 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Battleships
+This game was made with python and runs in a terminal. 
+The terminal used in this project is the Code Institute moch terminal on Heroku
+The aim of the game is to hit the enemy ships before the enemy hits yours
 
-Welcome Joseph Devaney,
+## How to play
+This game is based on the classic game called Battleships, a game that dates back to to world war one. you can see more information at this link on[Wikipedia]"https://en.wikipedia.org/wiki/Battleship_(game)"
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+firstly the player enters their name and then there ships are automattly placed on the board shown with an @ symbol, the enemies ships are hidden so the player will have to guess where they are
 
-## Reminders
+if you miss the location is marked with and X and hits are maked with an * 
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+to win you must sink all the enemy players ships first
 
-## Creating the Heroku app
+## Features
+### Existing Features
+#### Boards display
+    The ship locations of the boards are randomly generated but the computers locations remain hidden
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+    the result of the player is displayed
+    the result of the computer is displayed
+    the scores are recorded and displayed
 
-1. `heroku/python`
-2. `heroku/nodejs`
+    image of the end turn info
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+#### Input validation
+    the game will return an error if a non-numeral is entered
+    also if a figure outside the scope
+    lastly you cannot make the same guess twice
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+### Future Features
+I would like to let the player set the board size and the number of ships and also to place the ships where they wish.
 
-Connect your GitHub repository and deploy as normal.
+## Data Model
+    I had to use O.O.P. so i decided to use a class model 
+    each player has an instance that stores there names, the locations of their ships, their guesses
+    It also had methods to populate the board print the board and take a turn
 
-## Constraints
+## Testing
+i tested using the following:
+Passed the code through a PEP8 linterwith 2 errors
+Given invalid inputs: strings when numbers are expected, out of bounds inputs, same input twice
+Tested in my local terminal and the Code Institute Heroku terminal
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
------
-Happy coding!
+### Deployment
+This project was deployed using Code Institute's mock terminal for Heroku.
+Steps for deployment:
+Fork or clone this repository
+Create a new Heroku app o Set the buildbacks to Python and NodeJS in that order 
+Link the Heroku app to the repository
+Click on Deploy
+### Credits
+Code Institute for the deployment terminal
+Wikipedia for the details of the Battleships game

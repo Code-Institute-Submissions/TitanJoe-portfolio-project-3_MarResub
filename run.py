@@ -1,8 +1,9 @@
 from random import randint
 
 class Board:
+
     """
-    This is the main object of the program. 
+    This is the main object of the program.
     It sets the players name and if they are the computer
     It stores the location of the ships, scores and guesses made
     """
@@ -12,7 +13,7 @@ class Board:
         self.loc_ships = []
         self.loc_guesses = []
         self.score = 0
-        # these are the printable boards, 
+        # these are the printable boards,
         # their values are updated as as the game plays
         self.your_board = [
             ['. ', '. ', '. ', '. '],
@@ -35,9 +36,9 @@ class Board:
         while len(self.loc_ships) < 4:
             list = []
             while len(list) < 2:
-                point = randint(0,3)
+                point = randint(0, 3)
                 list.append(point)
-            if list not in self.loc_ships: 
+            if list not in self.loc_ships:
                 self.loc_ships.append(list)
                 coord_x = list[0]
                 coord_y = list[1]
@@ -51,14 +52,14 @@ class Board:
         if(self.player_type == "player"):
             print(f"This is Captian {self.cptn}'s board")
             print(*self.your_board[0],)
-            print(*self.your_board[1],) 
-            print(*self.your_board[2],) 
-            print(*self.your_board[3],) 
+            print(*self.your_board[1],)
+            print(*self.your_board[2],)
+            print(*self.your_board[3],)
         else:
             print("This is the computers board")
             print(*self.your_hidden_board[0],)
-            print(*self.your_hidden_board[1],) 
-            print(*self.your_hidden_board[2],) 
+            print(*self.your_hidden_board[1],)
+            print(*self.your_hidden_board[2],)
             print(*self.your_hidden_board[3],)
 
     def loc_validator(self):
@@ -82,8 +83,8 @@ class Board:
         else:
             while True:
                 target = []
-                target.append(randint(0,3))
-                target.append(randint(0,3))
+                target.append(randint(0, 3))
+                target.append(randint(0, 3))
                 if target not in self.loc_guesses:
                     self.loc_guesses.append(target)
                     return target
@@ -123,7 +124,7 @@ class Board:
                 print("The computer has missed!")
         if self.player_type == "computer":
             player_board.print_board()
-            computer_board.print_board()            
+            computer_board.print_board()
 
 def row_validator():
     """
@@ -165,13 +166,10 @@ def column_validator():
             else:
                 print("Please choose a number between 0 and 3")
 
-
-
-
 def play_game():
     """
     This function starts the game
-    prints the score every turn 
+    prints the score every turn
     checks if a player has won
     """
     while player_board.score <= 3 or computer_board.score <= 3:
@@ -187,13 +185,10 @@ def play_game():
             print(f"{computer_board.cptn} wins!")
             break
 
-
-    
-
 def game_setup():
     """
     this function sets up the boards by
-    populating them and 
+    populating them and
     printing the boards before the turn begins
     """
     computer_board.pop_board()
@@ -202,14 +197,13 @@ def game_setup():
     player_board.print_board()
     computer_board.print_board()
 
-
 print("Welcome to Battleships")
 cptn_name = input("What is your name: ")
 print(f"Welcome Captian {cptn_name}.")
 print("The boards use Zero-based numbering")
 print("Only values 0, 1, 2, 3 will be accepted")
 
-# I had to declare these outside of a function to make them globally accessible 
+# I had to declare these outside of a function to make them globally accessible
 computer_board = Board("The Computer", "computer")
 player_board = Board(cptn_name, "player")
 
