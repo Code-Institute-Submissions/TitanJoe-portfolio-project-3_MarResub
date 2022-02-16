@@ -1,6 +1,5 @@
 from random import randint
 
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
 class Board:
     """
     gg
@@ -42,13 +41,13 @@ class Board:
         this is a doc string
         """
         if(self.player_type == "player"):
-            print("This is your board")
+            print(f"This is Captian {self.cptn}'s board")
             print(*self.your_board[0],)
             print(*self.your_board[1],) 
             print(*self.your_board[2],) 
             print(*self.your_board[3],) 
         else:
-            print("This is the enemy board")
+            print("This is the computers board")
             print(*self.your_hidden_board[0],)
             print(*self.your_hidden_board[1],) 
             print(*self.your_hidden_board[2],) 
@@ -61,8 +60,8 @@ class Board:
         if self.player_type == "player":
             while True:
                 target = []
-                target.append(column_validator())
                 target.append(row_validator())
+                target.append(column_validator())
                 if target not in self.loc_guesses:
                     self.loc_guesses.append(target)
                     return target
@@ -85,19 +84,23 @@ class Board:
         """
         turn_guess = self.loc_validator()
         if self.player_type == "player":
+            print("Firing!")
             if computer_board.your_board[turn_guess[0]][turn_guess[1]] == "@ ":
                 computer_board.your_hidden_board[turn_guess[0]][turn_guess[1]] = "*"
-                print("hit!")
+                print(f"Captian {self.cptn} has hit!")
                 self.score += 1
             else:
                 computer_board.your_hidden_board[turn_guess[0]][turn_guess[1]] = "X "
-                print("miss!")
+                print(f"Captian {self.cptn} has missed!")
         else:
+            print("The Computer is firing!")
             if player_board.your_board[turn_guess[0]][turn_guess[1]] == "@ ":
                 player_board.your_board[turn_guess[0]][turn_guess[1]] = "* "
+                print("The Computer has hit!")
                 self.score += 1
             else:
                 player_board.your_board[turn_guess[0]][turn_guess[1]] = "X "
+                print("The computer has missed!")
         if self.player_type == "computer":
             player_board.print_board()
             computer_board.print_board()            
@@ -140,11 +143,12 @@ def play_game():
     .git/
     """
     while player_board.score <= 3 or computer_board.score <= 3:
-        print(f"{player_board.cptn} score is: {player_board.score}")
+        print(f"Captian {player_board.cptn}'s score is: {player_board.score}")
         print(f"Computers score is: {computer_board.score}")
+        input("Press enter to continue ")
         player_board.take_turn()
         if player_board.score == 4:
-            print(f"{player_board.cptn} wins!")
+            print(f"Captian {player_board.cptn} wins!")
             break
         computer_board.take_turn()
         if computer_board.score == 4:
@@ -168,8 +172,10 @@ def new_game():
 print("Welcome to Battleships")
 cptn_name = input("What is your name: ")
 print(f"Welcome Captian {cptn_name}.")
+print("The boards use Zero-based numbering")
+print("Only values 0, 1, 2, 3 will be accepted")
 
-computer_board = Board("enemy", "computer")
+computer_board = Board("The Computer", "computer")
 player_board = Board(cptn_name, "player")
 
 new_game()
