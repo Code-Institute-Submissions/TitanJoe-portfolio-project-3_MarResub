@@ -1,5 +1,6 @@
 from random import randint
 
+
 class Board:
 
     """
@@ -107,7 +108,7 @@ class Board:
         if self.player_type == "player":
             print("Firing!")
             if computer_board.your_board[turn_guess[0]][turn_guess[1]] == "@ ":
-                computer_board.your_hidden_board[turn_guess[0]][turn_guess[1]] = "*"
+                computer_board.your_hidden_board[turn_guess[0]][turn_guess[1]] = "* "
                 print(f"Captian {self.cptn} has hit!")
                 self.score += 1
             else:
@@ -125,6 +126,7 @@ class Board:
         if self.player_type == "computer":
             player_board.print_board()
             computer_board.print_board()
+
 
 def row_validator():
     """
@@ -146,6 +148,7 @@ def row_validator():
             else:
                 print("Please choose a number between 0 and 3")
 
+
 def column_validator():
     """
     This function simply asks the player for a column to target
@@ -166,6 +169,7 @@ def column_validator():
             else:
                 print("Please choose a number between 0 and 3")
 
+
 def play_game():
     """
     This function starts the game
@@ -185,6 +189,7 @@ def play_game():
             print(f"{computer_board.cptn} wins!")
             break
 
+
 def game_setup():
     """
     this function sets up the boards by
@@ -196,6 +201,7 @@ def game_setup():
 
     player_board.print_board()
     computer_board.print_board()
+
 
 print("Welcome to Battleships")
 cptn_name = input("What is your name: ")
